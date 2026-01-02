@@ -10,7 +10,7 @@ load_dotenv()
 model = ChatOllama(model="tinyllama:1.1b", temperature=0.4, max_token=200)
 # this model of hf is working u can test it as well if u dont want to run ollama in local
 model_ep = HuggingFaceEndpoint(
-    repo_id="google/gemma-2-2b-it", temperature=0.4, max_new_tokens=300
+    repo_id="google/gemma-2-2b-it", temperature=0.4, max_new_tokens=400
 )
 model_hf = ChatHuggingFace(llm=model_ep)
 
@@ -25,11 +25,8 @@ template2 = PromptTemplate(
 
 # isntead of doing these we can use chains + strOutputParsers
 # prompt1 = template1.invoke({"topic": "Balck Hole"})
-
 # result1 = model.invoke(prompt1)
-
 # prompt2 = template2.invoke({"text": result1.content})
-
 # result2 = model.invoke(prompt2)
 
 # print(result1.content)
