@@ -24,9 +24,9 @@ template2 = PromptTemplate(
 )
 
 # isntead of doing these we can use chains + strOutputParsers
-# prompt1 = template1.invoke({"topic": "Balck Hole"})
+# prompt1 = template1.format({"topic": "Balck Hole"})
 # result1 = model.invoke(prompt1)
-# prompt2 = template2.invoke({"text": result1.content})
+# prompt2 = template2.format({"text": result1.content})
 # result2 = model.invoke(prompt2)
 
 # print(result1.content)
