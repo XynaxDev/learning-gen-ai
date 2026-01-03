@@ -1,6 +1,6 @@
 # 🎓 AI Study Assistant - Complete Setup Guide
-
-A beautiful full-stack application that generates study notes, interactive quizzes, and visualizes LangChain execution flows with professional animations.
+![Home](./static/assets/home.png)
+_A beautiful application that generates study notes, interactive quizzes, and visualizes LangChain execution flows._
 
 ## ✨ Features
 
