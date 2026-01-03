@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Study Assistant - Notes & Quiz Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Highlight.js for code syntax highlighting -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Marked.js for better markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <!-- Background Effects -->
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div class="logo-glow"></div>
+                    </div>
+                    <div class="logo-text">
+                        <h1>AI Study Assistant</h1>
+                        <p class="header-subtitle">
+                            <i class="fas fa-sparkles"></i>
+                            Transform any topic into structured notes, interactive quizzes, and visual workflows
+                        </p>
+                    </div>
+                </div>
+
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span id="status-text">Ready</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="card glass-card">
+                    <div class="card-icon-header">
+                        <div class="icon-circle">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div>
+                            <h2>Enter Your Topic</h2>
+                            <p class="input-helper">
+                                <i class="fas fa-info-circle"></i>
+                                Paste any concept, article, or lecture notes. We'll generate structured study materials
+                                instantly.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <textarea id="topic-input"
+                            placeholder="Paste your topic or article here... (e.g., Transformers in Machine Learning, Neural Networks, etc.)"
+                            rows="8"></textarea>
+                        <div class="input-counter">
+                            <span id="char-count">0</span> characters
+                        </div>
+                    </div>
+
+                    <div class="controls">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="use-ollama" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">
+                                <i class="fas fa-server"></i>
+                                Use Local Ollama (Recommended)
+                            </span>
+                        </label>
+                        <button id="generate-btn" class="btn btn-primary btn-gradient">
+                            <i class="fas fa-magic"></i>
+                            <span>Generate Study Material</span>
+                            <div class="btn-shine"></div>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Animation -->
+            <div id="loading" class="loading hidden">
+                <div class="loading-content">
+                    <div class="loading-spinner">
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-ring"></div>
+                        <i class="fas fa-robot spinner-icon"></i>
+                    </div>
+                    <h3>AI is working its magic...</h3>
+                    <p class="loading-subtitle">Analyzing and generating your study materials</p>
+
+                    <div class="loading-steps">
+                        <div class="step" data-step="1">
+                            <div class="step-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-title">Processing topic</span>
+                                <div class="step-progress"></div>
+                            </div>
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-icon">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-title">Generating notes</span>
+                                <div class="step-progress"></div>
+                            </div>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-icon">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-title">Creating quiz</span>
+                                <div class="step-progress"></div>
+                            </div>
+                        </div>
+                        <div class="step" data-step="4">
+                            <div class="step-icon">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                            <div class="step-content">
+                                <span class="step-title">Building visualization</span>
+                                <div class="step-progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="results hidden">
+                <!-- Notes Section -->
+                <section class="notes-section fade-in">
+                    <div class="card glass-card">
+                        <div class="card-header">
+                            <div class="header-left">
+                                <div class="icon-circle">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <h2>Notes</h2>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-icon" onclick="copyNotes('markdown')" title="Copy as Markdown">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Markdown</span>
+                                </button>
+                                <button class="btn btn-icon" onclick="copyNotes('plain')" title="Copy as Plain Text">
+                                    <i class="fas fa-file-text"></i>
+                                    <span>Plain Text</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="notes-content" class="content-area markdown-body"></div>
+                    </div>
+                </section>
+
+                <!-- Quiz Section -->
+                <section class="quiz-section fade-in">
+                    <div class="card glass-card">
+                        <div class="card-header">
+                            <div class="header-left">
+                                <div class="icon-circle">
+                                    <i class="fas fa-question-circle"></i>
+                                </div>
+                                <h2>Interactive Quiz</h2>
+                            </div>
+                            <div class="quiz-score-badge">
+                                <i class="fas fa-trophy"></i>
+                                <span id="quiz-score">0/0</span>
+                            </div>
+                        </div>
+                        <div id="quiz-content" class="quiz-container"></div>
+                        <button id="check-answers" class="btn btn-primary btn-gradient" onclick="checkAnswers()">
+                            <i class="fas fa-check-double"></i>
+                            <span>Check Answers</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Visualization Section -->
+                <section class="visualization-section fade-in">
+                    <div class="card glass-card">
+                        <div class="card-header">
+                            <div class="header-left">
+                                <div class="icon-circle">
+                                    <i class="fas fa-project-diagram"></i>
+                                </div>
+                                <h2>LangChain Workflow</h2>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-icon" onclick="toggleAnimation()">
+                                    <i class="fas fa-play"></i>
+                                    <span id="anim-toggle">Play</span>
+                                </button>
+                                <button class="btn btn-icon" onclick="downloadVisualization()">
+                                    <i class="fas fa-download"></i>
+                                    <span>Export</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="viz-container">
+                            <div id="chain-animation" class="chain-animation">
+                                <div class="chain-flow">
+                                    <div class="chain-node" data-node="input">
+                                        <div class="node-icon"><i class="fas fa-file-import"></i></div>
+                                        <div class="node-label">Input Topic</div>
+                                        <div class="node-glow"></div>
+                                    </div>
+                                    <div class="chain-arrow">
+                                        <div class="arrow-line"></div>
+                                        <div class="flow-particle"></div>
+                                    </div>
+                                    <div class="chain-split">
+                                        <div class="chain-branch">
+                                            <div class="chain-node" data-node="notes">
+                                                <div class="node-icon"><i class="fas fa-sticky-note"></i></div>
+                                                <div class="node-label">Notes Generator</div>
+                                                <div class="node-glow"></div>
+                                            </div>
+                                            <div class="chain-arrow">
+                                                <div class="arrow-line"></div>
+                                                <div class="flow-particle"></div>
+                                            </div>
+                                        </div>
+                                        <div class="chain-branch">
+                                            <div class="chain-node" data-node="quiz">
+                                                <div class="node-icon"><i class="fas fa-question"></i></div>
+                                                <div class="node-label">Quiz Generator</div>
+                                                <div class="node-glow"></div>
+                                            </div>
+                                            <div class="chain-arrow">
+                                                <div class="arrow-line"></div>
+                                                <div class="flow-particle"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="chain-node" data-node="merge">
+                                        <div class="node-icon"><i class="fas fa-layer-group"></i></div>
+                                        <div class="node-label">Merge Content</div>
+                                        <div class="node-glow"></div>
+                                    </div>
+                                    <div class="chain-arrow">
+                                        <div class="arrow-line"></div>
+                                        <div class="flow-particle"></div>
+                                    </div>
+                                    <div class="chain-node" data-node="output">
+                                        <div class="node-icon"><i class="fas fa-file-export"></i></div>
+                                        <div class="node-label">Final Output</div>
+                                        <div class="node-glow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="viz-image-container">
+                                <img id="mermaid-diagram" alt="Chain Diagram" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Action Buttons -->
+                <div class="action-section fade-in">
+                    <button class="btn btn-secondary" onclick="resetForNextTopic()">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Generate Another Topic</span>
+                    </button>
+                    <button class="btn btn-outline" onclick="clearOutput()">
+                        <i class="fas fa-trash-alt"></i>
+                        <span>Clear All</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>
+                    <i class="fas fa-code"></i>
+                    Built with <span class="heart-beat">❤️</span> using LangChain & FastAPI
+                </p>
+                <div class="footer-links">
+                    <span class="footer-tag">
+                        <i class="fas fa-rocket"></i>
+                        AI-Powered Learning
+                    </span>
+                    <span class="footer-tag">
+                        <i class="fas fa-shield-alt"></i>
+                        Local Processing
+                    </span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
