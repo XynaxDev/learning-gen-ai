@@ -7,7 +7,7 @@ from langchain_core.runnables import RunnableLambda
 model = ChatOllama(model="llama3.2:3b", temperature=0.6)
 
 prompt = PromptTemplate(
-    template="Summarise the given text with their key concepts: {text}",
+    template="Summarize the given text with their key concepts: {text}",
     input_variables=['text']
 )
 
@@ -17,7 +17,6 @@ parser = StrOutputParser()
 loader = TextLoader("./IndexesRAG/DocumentLoaders/nolan.txt", encoding='utf-8')
 docs = loader.load()
 # fetching the content
-loader2 = RunnableLambda(lambda x: x.load(), lambda y: y[0].page_content)
 docs_content = docs[0].page_content
 
 chain = prompt | model | parser
