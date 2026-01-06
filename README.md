@@ -88,8 +88,7 @@ Experiments around LangChain `Chain` primitives: simple, sequential, parallel, c
     - Routing logic and basic decision flows inside chains.
     - The `AIStudyAssistant` subfolder holds a more applied study-helper example.
 
-- **Explore code**
-- [./Chains/](./Chains/)
+- **Explore code**: [./Chains/](./Chains/)
 
 ### `IndexesRAG*` 
 Working with document loaders and text splitters to build retrieval-augmented generation (RAG) style pipelines.
@@ -99,8 +98,7 @@ Working with document loaders and text splitters to build retrieval-augmented ge
     - Experimenting with `TextSplitters` for chunking text before indexing.
     - Forming the basis for retrieval and semantic search workflows.
 
-- **Explore code**
-- [./IndexesRAG/](./IndexesRAG/)
+- **Explore code**: [./IndexesRAG/](./IndexesRAG/)
 
 ### `Models`
 Central place for LLMs, chat models, embedding models, and semantic search utilities.
@@ -111,8 +109,7 @@ Central place for LLMs, chat models, embedding models, and semantic search utili
     - `LLMs/`: generic LLM examples and utilities.
     - Semantic search and retrieval experiments.
 
-- **Explore code**
-- [./Models/](./Models/)
+- **Explore code**: [./Models/](./Models/)
 
 ### `Prompts`
 Prompt-focused experiments and chat-oriented utilities.
@@ -123,8 +120,7 @@ Prompt-focused experiments and chat-oriented utilities.
     - Working with static vs dynamic prompts and prompt generators.
     - Building structured chat prompts, message templates, and chat history handling.
 
-- **Explore code**
-- [./Prompts/](./Prompts/)
+- **Explore code**: [./Prompts/](./Prompts/)
 
 ### `Runnables`
 Using LangChain `Runnable*` primitives to compose more advanced and flexible workflows.
@@ -136,16 +132,14 @@ Using LangChain `Runnable*` primitives to compose more advanced and flexible wor
     - `runnableLambda.py`, `runnablePassThrough.py`: functional / utility runnables.
     - `runnables_core.ipynb`: an interactive notebook exploring runnable concepts.
 
-- **Explore code**
-- [./Runnables/](./Runnables/)
+- **Explore code**: [./Runnables/](./Runnables/)
 
 ### `StructuredOutputs`
 Controlling and validating model outputs to match structured schemas.
 - **What this area is for**
     - `BuiltinLLMs/`: structured-output features that are built into certain LLM providers.
     - `OutputParsers/`: parsing raw model text into JSON or typed Python objects.
-- **Explore code**
-- [./StructuredOutputs/](./StructuredOutputs/)
+- **Explore code**: [./StructuredOutputs/](./StructuredOutputs/)
   
 ### `Useful Resources & Explorers` 
 These are some genuinely great tools and references I often use while experimenting:
