@@ -2,7 +2,6 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_ollama import ChatOllama
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnableLambda
 
 model = ChatOllama(model="llama3.2:3b", temperature=0.6)
 
@@ -22,7 +21,5 @@ docs_content = docs[0].page_content
 
 print(docs_content)
 # chain = prompt | model | parser
-
 # summary = chain.invoke({'text': docs_content})
-
 # print(summary)
