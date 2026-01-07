@@ -6,7 +6,6 @@
 ### `Gen AI Journal 📝` 
 [Notion Journal](https://akgenai-journal.notion.site/Generative-AI-Journal-29fc4f0bd1aa8063819ecec314d0ae67?source=copy_link) | [Linkedin](https://linkedin.com/in/akass7) | [Gmail](mailto:akashkumar.cs27@gmail.com) | [Instagram](https://instagram.com/xynaxhere)
 
-
 ![Gen AI Journal](https://img.shields.io/badge/GenAI-Journal-8A2BE2?style=rounded&logo=openai&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=rounded&logo=python&logoColor=white)
 ![LangChain](https://img.shields.io/badge/LangChain-Ecosystem-0F9D58?style=rounded&logo=langchain&logoColor=white)
@@ -17,6 +16,7 @@
 ![GitHub](https://img.shields.io/badge/GitHub-Repo-24292F?style=rounded&logo=github&logoColor=white)
 ![Notion](https://img.shields.io/badge/Notion-Journal-111111?style=rounded&logo=notion&logoColor=white)
 
+> **⭐ If this repo helped you, please consider starring it!**
 
 </div>
 </div>
