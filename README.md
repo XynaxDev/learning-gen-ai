@@ -57,8 +57,8 @@ pip install -r requirements.txt
     - Use the `Prompts/.env` file for any prompt-related secrets (chat history storage, API keys, etc.).
 
 
-### `Local models (Ollama, custom LLMs)`
-This project uses local models via Ollama, for example in `customLLm.py` with `ChatOllama` (e.g. `llama3.2:3b`).
+### `Local models (Ollama)`
+This project uses local models via Ollama with `ChatOllama` (e.g. `llama3.2:3b`).
 
 - **Install and run Ollama**
     - Download and install from https://ollama.com
@@ -71,7 +71,7 @@ ollama pull llama3.2:3b
 
 - **Run a local LLM example**
 ```bash
-python customLLm.py
+python localLLm.py
 ```
 
 ### `API models (hosted providers)`
