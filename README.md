@@ -97,6 +97,8 @@ Working with document loaders and text splitters to build retrieval-augmented ge
     - Trying different `DocumentLoaders` to bring data into the system.
     - Experimenting with `TextSplitters` for chunking text before indexing.
     - Forming the basis for retrieval and semantic search workflows.
+    - In Vector Stores Indexing embeddings for efficient similarity-based search and metadata management.
+    - In Retrievers using compression logic to extract specific facts and filter noise from retrieved documents.
 
 - **Explore code**: [./IndexesRAG/](./IndexesRAG/)
 
